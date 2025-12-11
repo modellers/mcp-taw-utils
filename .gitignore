@@ -167,6 +167,7 @@ __pycache__/
 .venv/
 venv/
 ENV/
+bin/
 
 # LanceDB
 .lancedb/
