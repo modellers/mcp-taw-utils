@@ -12,6 +12,7 @@ import {
   setCollection,
   getItemFromGit,
   setCollectionItem,
+  GitConfig,
 } from "./tools.js";
 
 const server = new Server(
@@ -128,7 +129,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         if (!args || typeof args.id !== "string" || !args.data) {
           throw new Error("Invalid arguments: 'id' and 'data' are required");
         }
-        return await setCollection(args.id, args.data);
+        return await setCollection(args.id, args.data as Record<string, unknown>);
 
       case "mcp_collection_item_from_git":
         if (!args || typeof args.uri !== "string") {
@@ -140,7 +141,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         if (!args || typeof args.id !== "string" || !args.gitConfig) {
           throw new Error("Invalid arguments: 'id' and 'gitConfig' are required");
         }
-        return await setCollectionItem(args.id, args.gitConfig);
+        return await setCollectionItem(args.id, args.gitConfig as GitConfig);
 
       default:
         throw new Error(`Unknown tool: ${name}`);

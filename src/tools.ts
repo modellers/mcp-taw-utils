@@ -3,6 +3,25 @@ import { getFirestore } from "./firebase.js";
 const COLLECTION_NAME = "config";
 
 /**
+ * Interface for Git configuration objects
+ */
+export interface GitConfig {
+  uri: string;
+  type: string;
+  parsedAt: string;
+  host?: string;
+  path?: string;
+  protocol?: string;
+  owner?: string;
+  repo?: string;
+}
+
+/**
+ * Type for flexible document data
+ */
+export type DocumentData = Record<string, unknown>;
+
+/**
  * List all documents in the Firebase 'config' collection
  */
 export async function listCollection() {
@@ -67,9 +86,9 @@ export async function getCollection(id: string) {
 }
 
 /**
- * Add or create a document in the 'config' collection
+ * Create or update a document in the 'config' collection
  */
-export async function setCollection(id: string, data: any) {
+export async function setCollection(id: string, data: DocumentData) {
   try {
     const db = getFirestore();
     const docRef = db.collection(COLLECTION_NAME).doc(id);
@@ -114,7 +133,7 @@ export async function getItemFromGit(uri: string) {
 /**
  * Update Git MCP config by ID in the 'config' collection
  */
-export async function setCollectionItem(id: string, gitConfig: any) {
+export async function setCollectionItem(id: string, gitConfig: GitConfig) {
   try {
     const db = getFirestore();
     const docRef = db.collection(COLLECTION_NAME).doc(id);
@@ -158,8 +177,8 @@ export async function setCollectionItem(id: string, gitConfig: any) {
  * - git@github.com:user/repo.git
  * - https://github.com/user/repo
  */
-function parseGitUri(uri: string): any {
-  const config: any = {
+function parseGitUri(uri: string): GitConfig {
+  const config: GitConfig = {
     uri,
     type: "git",
     parsedAt: new Date().toISOString(),
