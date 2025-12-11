@@ -137,3 +137,9 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Secrets and credentials
+secrets/*
+!secrets/*.example
+*.serviceaccount.json
+!*.serviceaccount.json.example
