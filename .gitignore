@@ -1,3 +1,8 @@
+# Mac
+.DS_Store
+# Thumbnails
+._*.DS_Store
+
 # Logs
 logs
 *.log
@@ -137,3 +142,36 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Secrets and credentials
+secrets/
+!secrets/.gitkeep
+*.serviceaccount.json
+!*.serviceaccount.json.example
+
+# Config files with potentially sensitive data
+/library.json
+/models.json
+/workstation*.json
+config/config.yaml
+config/config.dev.yaml
+config/library.json
+config/models.json
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv/
+venv/
+ENV/
+bin/
+
+# LanceDB
+.lancedb/
+MCP_VERSION.md
+
+# Binary secrets
+bin/
